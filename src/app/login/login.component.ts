@@ -7,10 +7,11 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  public from: FormGroup
+  public login: FormGroup;
   constructor(public fb: FormBuilder) {
-    this.from = this.fb.group({
-      'usrename': ['', Validators.compose([Validators.required])],
+
+    this.login = this.fb.group({
+      'username': ['', Validators.compose([Validators.required])],
       'passwoed': ['', Validators.compose([Validators.required])]
     });
   }
