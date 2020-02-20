@@ -12,11 +12,15 @@ export class LoginComponent implements OnInit {
 
     this.login = this.fb.group({
       'username': ['', Validators.compose([Validators.required])],
-      'passwoed': ['', Validators.compose([Validators.required])]
+      'password': ['', Validators.compose([Validators.required])]
     });
   }
 
   ngOnInit() {
+  }
+
+  getLogin(value){
+
   }
 
 }

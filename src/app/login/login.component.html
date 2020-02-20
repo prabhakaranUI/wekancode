@@ -1,6 +1,6 @@
 <div fxLayout="row" fxLayoutAlign="center center">
   <mat-card fxFlex="30">
-  <form [formGroup]="login" (ngSubmit)="login.value">
+  <form [formGroup]="login" (ngSubmit)="getLogin(login.value)">
     <div fxLayout="row" fxLayoutAlign="center center">
     <h3>LogIn</h3>
     </div>
