@@ -1,12 +1,20 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules  } from '@angular/router';
-import {LoginComponent} from "./login/login.component";
 import { ModuleWithProviders } from '@angular/core';
+import {HorsesComponent} from "./pages/horses/horses.component";
+import {LoginComponent} from "./pages/login/login.component";
+import {PagesComponent} from "./pages/pages.component";
+import {AuthGuardService} from "./shared/auth-guard.service";
 
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
-  {path: 'login', component:LoginComponent}
+  {path: '',
+    component: PagesComponent,  canActivate: [AuthGuardService],  children: [
+      {path: 'horses', component: HorsesComponent }
+    ]},
+
+   {path: 'login', component:LoginComponent}
 ];
 
 

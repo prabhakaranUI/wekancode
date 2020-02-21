@@ -9,18 +9,22 @@ import { MatCardModule} from '@angular/material/card';
 import { MatButtonModule} from '@angular/material/button';
 import { MatIconModule} from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './pages/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {AuthService} from './shared/auth.service';
 import {ConfigurationService} from './shared/configuration.service';
 import {AuthGuardService} from './shared/auth-guard.service';
 import {LoginService} from './shared/login.service';
+import { HorsesComponent } from './pages/horses/horses.component';
+import { PagesComponent } from './pages/pages.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    HorsesComponent,
+    PagesComponent
   ],
   imports: [
     BrowserModule,

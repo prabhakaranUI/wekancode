@@ -26,7 +26,7 @@ export class AuthService {
 
   checkAuthentication() {
     if (this.loggedIn()) {
-      this.router.navigate(['/home/11']);
+      this.router.navigate(['/horses']);
     }
   }
 
