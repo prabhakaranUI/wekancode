@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators, EmailValidator} from '@angular/forms';
 import {LoginService} from "../shared/login.service";
+import {MatSnackBar} from '@angular/material/snack-bar';
+import * as sha512 from 'js-sha512';
+import {AuthService} from "../shared/auth.service";
+
 
 @Component({
   selector: 'app-login',
@@ -9,11 +13,11 @@ import {LoginService} from "../shared/login.service";
 })
 export class LoginComponent implements OnInit {
   public login: FormGroup;
-  constructor(public fb: FormBuilder, public login_service: LoginService ) {
+  constructor(public fb: FormBuilder, public login_service: LoginService, private _snackBar: MatSnackBar, public auth: AuthService) {
 
     this.login = this.fb.group({
-      'email': ['', Validators.compose([Validators.required])],
-      'password': ['', Validators.compose([Validators.required])]
+      'email': ['tamilselvan@mailinator.com', Validators.compose([Validators.required])],
+      'password': ['Staller123#', Validators.compose([Validators.required])]
     });
   }
 
@@ -21,12 +25,19 @@ export class LoginComponent implements OnInit {
   }
 
 
+    openSnackBar(message: string, action: string) {
+        this._snackBar.open(message, action, {
+            duration: 2000,
+        });
+    }
+
+
   ////login////
   getLogin(value){
     if(this.login.valid){
         const data = {
             'email': value.email,
-            'password': value.password
+            'password': sha512.sha512(value.password)
         };
        this.login_service.getLogin(data).subscribe(
            (successData) => {
@@ -40,8 +51,10 @@ export class LoginComponent implements OnInit {
     }
   }
 
-   public loginDataSuccess(data){
-      console.log(data)
+   public loginDataSuccess(successData){
+       this.openSnackBar('Login Successful', 'ok');
+       this.auth.setSessionData('access_token', successData.data.access_token)
+      console.log(successData)
 
    }
     public loginDataFailure(error){

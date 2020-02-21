@@ -11,6 +11,11 @@ import { MatIconModule} from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {AuthService} from './shared/auth.service';
+import {ConfigurationService} from './shared/configuration.service';
+import {AuthGuardService} from './shared/auth-guard.service';
+import {LoginService} from './shared/login.service';
 
 @NgModule({
   declarations: [
@@ -28,10 +33,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     routing,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSnackBarModule
 
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    ConfigurationService,
+    AuthGuardService,
+    LoginService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

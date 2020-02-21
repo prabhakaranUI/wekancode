@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiHost: 'http://dev.api.staller.show/',
+  apiHost: 'http://dev.api.staller.show/v1',
   webHost: 'http://localhost:4200'
 };
 

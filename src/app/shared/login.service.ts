@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import {AuthService} from './auth.service';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
 import {ConfigurationService} from './configuration.service';
 import {catchError, map} from 'rxjs/operators';
-import {Observable} from "rxjs";
+import {Observable, throwError} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-
+  apiUrl: string = this.configurationService.getHost();
   constructor(private http: HttpClient, private configurationService: ConfigurationService, public auth: AuthService) { }
+
 
 
   getLogin(data) {
@@ -19,28 +20,29 @@ export class LoginService {
     const httpOptions = {
       headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'})
     };
-    const url = this.configurationService.getHost() + 'users/login' ;
-    return this.http.post(url , json, httpOptions).pipe(
-        map(this.extractData ),
-        catchError(this.handleError));
+    const url = `${this.apiUrl}/users/login` ;
+    return this.http.post(url , data, httpOptions).pipe(
+        catchError(this.error));
   }
 
 
 
 
-  private extractData(res: Response) {
-    const body = res;
-    return body || {};
-  }
 
-  private handleError(error: Response | any) {
-    let errMsg: string;
-    if (error instanceof Response) {
-      const err = error || JSON.stringify(error);
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+
+
+
+
+
+  // Handle Errors
+  error(error: HttpErrorResponse) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      errorMessage = error.error.message;
     } else {
-      errMsg = error.message ? error.message : error.toString();
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    return Observable.throw(error);
+    console.log(errorMessage);
+    return throwError(errorMessage);
   }
 }

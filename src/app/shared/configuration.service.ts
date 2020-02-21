@@ -7,8 +7,12 @@ import {environment} from '../../environments/environment';
 export class ConfigurationService {
   apiHost: string = environment.apiHost;
   webHost: string = environment.webHost;
-
-  constructor() { }
+  webhost: string;
+  apihost: string;
+  constructor() {
+    this.webhost = this.webHost;
+    this.apihost = this.apiHost;
+  }
 
   getHost() {
     return this.apiHost;
