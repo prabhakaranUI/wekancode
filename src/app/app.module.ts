@@ -10,6 +10,8 @@ import { MatButtonModule} from '@angular/material/button';
 import { MatIconModule} from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LoginComponent } from './pages/login/login.component';
+import { NgxDatatableModule} from '@swimlane/ngx-datatable';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {AuthService} from './shared/auth.service';
@@ -18,13 +20,16 @@ import {AuthGuardService} from './shared/auth-guard.service';
 import {LoginService} from './shared/login.service';
 import { HorsesComponent } from './pages/horses/horses.component';
 import { PagesComponent } from './pages/pages.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogComponent } from './pages/horses/dialog/dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HorsesComponent,
-    PagesComponent
+    PagesComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +43,9 @@ import { PagesComponent } from './pages/pages.component';
     routing,
     HttpClientModule,
     ReactiveFormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    NgxDatatableModule,
+    MatDialogModule
 
   ],
   providers: [
@@ -46,6 +53,9 @@ import { PagesComponent } from './pages/pages.component';
     ConfigurationService,
     AuthGuardService,
     LoginService
+  ],
+  entryComponents:[
+    DialogComponent
   ],
   bootstrap: [AppComponent]
 })

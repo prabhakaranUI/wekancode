@@ -13,8 +13,8 @@ export class LoginService {
   constructor(private http: HttpClient, private configurationService: ConfigurationService, public auth: AuthService) { }
 
 
-
-  getLogin(data) {
+//login
+  doLogin(data) {
     console.log(data)
     let json = JSON.stringify(data);
     const httpOptions = {
@@ -27,10 +27,16 @@ export class LoginService {
 
 
 
-
-
-
-
+  //List
+  list() {
+    const token = this.auth.getAccessToken();
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Authorization' : 'Bearer' + token})
+    };
+    const url = `${this.apiUrl}/horses ` ;
+    return this.http.get(url, httpOptions).pipe(
+        catchError(this.error));
+  }
 
 
 
