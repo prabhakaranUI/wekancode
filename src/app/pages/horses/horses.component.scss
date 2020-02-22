@@ -4,6 +4,16 @@
 
     table {
       width: 100%;
+      border-collapse: collapse;
+      th, td{
+        border: 1px solid #ccc;
+        padding: 10px;
+      }
+      th{
+        background: cadetblue;
+        color: #fff;
+      }
+
     }
 
     .add {

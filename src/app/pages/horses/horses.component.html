@@ -10,17 +10,18 @@
             <th>Horse Age Verified</th>
             <th>Horse DOB</th>
             <th>Horse Color</th>
-            <th>USHJA</th>
             <th>Action</th>
             </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+            <tr *ngFor="let horse of horseList">
+                <td>{{horse.horse_name}}</td>
+                <td>{{horse.horse_number}}</td>
+                <td>{{horse.age_verified == 1? 'Yes' : 'No'}}</td>
+                <td>{{horse.dob}}</td>
+                <td>{{horse.color}}</td>
+                <td>
+                    <button mat-mini-fab color="primary"><i class="material-icons">create</i></button>
+                    <button mat-mini-fab color="warn"><i class="material-icons">delete</i></button>
+                </td>
             </tr>
         </table>
     </mat-card>

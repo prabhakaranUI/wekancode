@@ -10,6 +10,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
   styleUrls: ['./horses.component.scss']
 })
 export class HorsesComponent implements OnInit {
+    public horseList: any;
   constructor(public login_service: LoginService, public dialog: MatDialog) {
 
   }
@@ -43,6 +44,7 @@ export class HorsesComponent implements OnInit {
 
   public loginDataSuccess(successData){
     console.log(successData, 'horses');
+    this.horseList = successData.data
   }
   public loginDataFailure(error){
     console.log(error)

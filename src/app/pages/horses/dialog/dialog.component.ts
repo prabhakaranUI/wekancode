@@ -41,8 +41,7 @@ export class DialogComponent implements OnInit {
 
   horseDetail(value) {
     if (this.horse.valid) {
-      this.setDob = this.datePipe.transform(this.horse.controls['horseDob'].value, 'y-m-d');
-      console.log(this.setDob, 'setDob');
+      this.setDob = this.datePipe.transform(this.horse.controls['horseDob'].value, 'yyyy-MM-dd');
       const data = {
       'horse_name': this.horse.controls['horseName'].value,
       'horse_number': this.horse.controls['horseNum'].value,
