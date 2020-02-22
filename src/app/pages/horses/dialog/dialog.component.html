@@ -1,1 +1,51 @@
-<p>dialog works!</p>
+
+<h1 mat-dialog-title>Add Horse</h1>
+<form [formGroup]="horse" (ngSubmit)="horseDetail(horse.value)">
+<div mat-dialog-content>
+
+    <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Horse Name</mat-label>
+        <textarea matInput formControlName="horseName"></textarea>
+        <mat-error *ngIf="horse.controls.horseName.errors?.required">Horse Name is required</mat-error>
+
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Hores Number</mat-label>
+        <textarea matInput formControlName="horseNum"></textarea>
+        <mat-error *ngIf="horse.controls.horseNum.errors?.required">Hores Number is required</mat-error>
+
+    </mat-form-field>
+    <mat-radio-group aria-label="Age Verified" formControlName="AgeVerified">
+        <mat-label style="margin-right: 10px">Age Verified:</mat-label>
+        <mat-radio-button value="yes" style="margin-right: 10px">Yes</mat-radio-button>
+        <mat-radio-button value="no">NO</mat-radio-button>
+    </mat-radio-group>
+    <mat-form-field class="w-100">
+        <mat-label>Horse DOB</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="horseDob">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="horse.controls.horseDob.errors?.required">Horse DOB is required</mat-error>
+
+    </mat-form-field>
+    <mat-form-field class="w-100">
+        <mat-label>Horse Color</mat-label>
+        <mat-select formControlName="horseColor">
+            <mat-option *ngFor="let food of food" [value]="food.value">
+                {{food.viewValue}}
+            </mat-option>
+        </mat-select>
+        <mat-error *ngIf="horse.controls.horseColor.errors?.required">Horse Color is required</mat-error>
+    </mat-form-field>
+    <mat-checkbox formControlName="ushja">USHJA</mat-checkbox>
+</div>
+<div mat-dialog-actions fxLayout="row"  fxLayoutAlign="end center">
+    <button mat-button  (click)="onNoClick()">Cancel</button>
+    <button mat-raised-button color="primary" cdkFocusInitial type="submit" >Submit</button>
+</div>
+</form>
+
+
+
+
+

@@ -39,6 +39,18 @@ export class LoginService {
   }
 
 
+  //Add
+  add(data) {
+    const token = this.auth.getAccessToken();
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Authorization' : 'Bearer' + token})
+    };
+    const url = `${this.apiUrl}/horses ` ;
+    return this.http.post(url , data, httpOptions).pipe(
+        catchError(this.error));
+  }
+
+
 
   // Handle Errors
   error(error: HttpErrorResponse) {

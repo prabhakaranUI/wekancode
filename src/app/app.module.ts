@@ -22,6 +22,15 @@ import { HorsesComponent } from './pages/horses/horses.component';
 import { PagesComponent } from './pages/pages.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogComponent } from './pages/horses/dialog/dialog.component';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSelectModule} from '@angular/material/select';
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -45,7 +54,12 @@ import { DialogComponent } from './pages/horses/dialog/dialog.component';
     ReactiveFormsModule,
     MatSnackBarModule,
     NgxDatatableModule,
-    MatDialogModule
+    MatDialogModule,
+    MatRadioModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatCheckboxModule,
+    MatSelectModule
 
   ],
   providers: [

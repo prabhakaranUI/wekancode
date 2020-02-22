@@ -21,7 +21,7 @@ export class HorsesComponent implements OnInit {
 
     horseDialog(): void {
         const dialogRef = this.dialog.open(DialogComponent, {
-            width: '250px'
+            width: '500px',
         });
 
         dialogRef.afterClosed().subscribe(result => {

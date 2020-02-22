@@ -1,10 +1,14 @@
 #horse{
-  margin-top: 100px;
-  table{
-    width: 100%;
-  }
-  .add{
-    margin-bottom: 20px;
+  mat-card {
+    margin-top: 100px;
+
+    table {
+      width: 100%;
+    }
+
+    .add {
+      margin-bottom: 20px;
+    }
   }
 
 }
