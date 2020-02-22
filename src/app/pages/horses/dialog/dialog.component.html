@@ -1,6 +1,6 @@
 
-<h1 mat-dialog-title>Add Horse</h1>
-<form [formGroup]="horse" (ngSubmit)="horseDetail(horse.value)">
+<h1 mat-dialog-title>{{openkey}} Horse</h1>
+<form [formGroup]="horse" (ngSubmit)="horseDetail(horse.value)" *ngIf="openkey == 'add' || openkey == 'update'">
 <div mat-dialog-content>
 
     <mat-form-field appearance="fill" class="w-100">
@@ -40,10 +40,17 @@
     <mat-checkbox formControlName="ushja">USHJA</mat-checkbox>
 </div>
 <div mat-dialog-actions fxLayout="row"  fxLayoutAlign="end center">
-    <button mat-button  (click)="onNoClick()">Cancel</button>
+    <button mat-button  (click)="onNoClick('close')">Cancel</button>
     <button mat-raised-button color="primary" cdkFocusInitial type="submit" >Submit</button>
 </div>
 </form>
+
+<div fxLayout="row"  fxLayoutAlign="center center" *ngIf="openkey == 'delete'">
+    <p>Are you sure want to delete?</p>
+    <button mat-button  (click)="onNoClick('close')">Cancel</button>
+    <button mat-raised-button color="primary" cdkFocusInitial type="submit" (click)="onNoClick('confirm')">Delete</button>
+
+</div>
 
 
 

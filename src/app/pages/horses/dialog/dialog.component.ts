@@ -12,12 +12,14 @@ import { DatePipe } from '@angular/common';
 export class DialogComponent implements OnInit {
   public horseColor: any
   public setDob: any
+  public openkey: any
   public horse: FormGroup;
 
   constructor(
       public dialogRef: MatDialogRef<DialogComponent>,
       @Inject(MAT_DIALOG_DATA) public data: any, public fb: FormBuilder, public login_service: LoginService, private datePipe: DatePipe) {
 
+     this.openkey = data;
     this.horseColor = [
       {value: 'white', viewValue: 'White'},
       {value: 'brown', viewValue: 'Brown'},
@@ -63,7 +65,7 @@ export class DialogComponent implements OnInit {
 
   public loginDataSuccess(successData) {
     console.log(successData);
-    this.onNoClick()
+    this.onNoClick('cloce')
 
   }
 
@@ -72,8 +74,12 @@ export class DialogComponent implements OnInit {
   }
 
 
-  onNoClick(): void {
-    this.dialogRef.close();
+
+
+
+
+  onNoClick(key): void {
+    this.dialogRef.close(key);
   }
 
 }

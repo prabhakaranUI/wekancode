@@ -1,7 +1,7 @@
 <div fxLayout="row" fxLayoutAlign="center center" id="horse">
     <mat-card fxFlex="60">
         <div fxLayout="row"  fxLayoutAlign="end center">
-            <button mat-raised-button color="primary" class="add" (click)="horseDialog()">+ ADD</button>
+            <button mat-raised-button color="primary" class="add" (click)="horseDialog('add', '')">+ ADD</button>
         </div>
         <table>
             <tr>
@@ -18,9 +18,9 @@
                 <td>{{horse.age_verified == 1? 'Yes' : 'No'}}</td>
                 <td>{{horse.dob}}</td>
                 <td>{{horse.color}}</td>
-                <td>
-                    <button mat-mini-fab color="primary"><i class="material-icons">create</i></button>
-                    <button mat-mini-fab color="warn"><i class="material-icons">delete</i></button>
+                <td style="text-align: center">
+                    <button mat-mini-fab color="primary" style="margin-right: 10px" (click)="horseDialog('update', '')"><i class="material-icons">create</i></button>
+                    <button mat-mini-fab color="warn"><i class="material-icons" (click)="horseDialog('delete', horse.id)">delete</i></button>
                 </td>
             </tr>
         </table>

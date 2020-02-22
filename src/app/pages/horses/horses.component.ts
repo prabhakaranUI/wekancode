@@ -20,13 +20,18 @@ export class HorsesComponent implements OnInit {
   }
 
 
-    horseDialog(): void {
+    horseDialog(key, id): void {
         const dialogRef = this.dialog.open(DialogComponent, {
             width: '500px',
+            data: key
         });
 
         dialogRef.afterClosed().subscribe(result => {
+            this.getList();
             console.log('The dialog was closed');
+            if(result == 'confirm'){
+                this.deleteHorse(id);
+            }
         });
     }
 
@@ -49,5 +54,26 @@ export class HorsesComponent implements OnInit {
   public loginDataFailure(error){
     console.log(error)
   }
+
+
+    ////Delete////
+    deleteHorse(id){
+        this.login_service.delete(id).subscribe(
+            (successData) => {
+                this.deleteHorseSuccess(successData);
+            },
+            (error) => {
+                this.deleteHorseFailure(error);
+            });
+    }
+
+    public deleteHorseSuccess(successData){
+        console.log(successData);
+        this.getList();
+    }
+    public deleteHorseFailure(error){
+        console.log(error)
+    }
+
 
 }
