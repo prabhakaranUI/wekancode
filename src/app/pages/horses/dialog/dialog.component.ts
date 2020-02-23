@@ -58,21 +58,30 @@ export class DialogComponent implements OnInit {
     if (this.horse.valid) {
       this.setDob = this.datePipe.transform(this.horse.controls['horseDob'].value, 'yyyy-MM-dd');
       const data = {
-      'horse_name': this.horse.controls['horseName'].value,
-      'horse_number': this.horse.controls['horseNum'].value,
-      'age_verified': this.horse.controls['AgeVerified'].value == 'yes' ? true : false,
-      'dob': this.setDob,
-      'color': this.horse.controls['horseColor'].value,
-      'ushja_registered': this.horse.controls['ushja'].value,
+        'horse_name': this.horse.controls['horseName'].value,
+        'horse_number': this.horse.controls['horseNum'].value,
+        'age_verified': this.horse.controls['AgeVerified'].value == 'yes' ? true : false,
+        'dob': this.setDob,
+        'color': this.horse.controls['horseColor'].value,
+        'ushja_registered': this.horse.controls['ushja'].value,
       };
-
-      this.login_service.add(data).subscribe(
-          (successData) => {
-            this.loginDataSuccess(successData);
-          },
-          (error) => {
-            this.loginDataFailure(error);
-          });
+      if (key == 'add') {
+        this.login_service.add(data).subscribe(
+            (successData) => {
+              this.loginDataSuccess(successData);
+            },
+            (error) => {
+              this.loginDataFailure(error);
+            });
+      } else{
+        this.login_service.update(data, this.selectData.id).subscribe(
+            (successData) => {
+              this.loginDataSuccess(successData);
+            },
+            (error) => {
+              this.loginDataFailure(error);
+            });
+      }
     }
   }
 
