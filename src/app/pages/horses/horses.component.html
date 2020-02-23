@@ -3,7 +3,7 @@
         <div fxLayout="row"  fxLayoutAlign="end center">
             <button mat-raised-button color="primary" class="add" (click)="horseDialog('add', '')">+ ADD</button>
         </div>
-        <table>
+        <table *ngIf="horseList != ''">
             <tr>
             <th>Horse Name</th>
             <th>Horse Number</th>
@@ -19,10 +19,11 @@
                 <td>{{horse.dob}}</td>
                 <td>{{horse.color}}</td>
                 <td style="text-align: center">
-                    <button mat-mini-fab color="primary" style="margin-right: 10px" (click)="horseDialog('update', '')"><i class="material-icons">create</i></button>
+                    <button mat-mini-fab color="primary" style="margin-right: 10px" (click)="horseDialog('update', horse.id)"><i class="material-icons">create</i></button>
                     <button mat-mini-fab color="warn"><i class="material-icons" (click)="horseDialog('delete', horse.id)">delete</i></button>
                 </td>
             </tr>
         </table>
+        <p *ngIf="horseList == ''" style="text-align: center">No Records</p>
     </mat-card>
 </div>

@@ -21,9 +21,15 @@ export class HorsesComponent implements OnInit {
 
 
     horseDialog(key, id): void {
+        let selectData = '';
+         for(let i = 0; i < this.horseList.length; i++){
+          if(this.horseList[i].id == id){
+              selectData = this.horseList[i];
+          }
+      }
         const dialogRef = this.dialog.open(DialogComponent, {
             width: '500px',
-            data: key
+            data: {key, selectData}
         });
 
         dialogRef.afterClosed().subscribe(result => {

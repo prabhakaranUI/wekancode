@@ -13,13 +13,15 @@ export class DialogComponent implements OnInit {
   public horseColor: any
   public setDob: any
   public openkey: any
+  public selectData: any
   public horse: FormGroup;
 
   constructor(
       public dialogRef: MatDialogRef<DialogComponent>,
       @Inject(MAT_DIALOG_DATA) public data: any, public fb: FormBuilder, public login_service: LoginService, private datePipe: DatePipe) {
 
-     this.openkey = data;
+     this.openkey = data.key;
+     this.selectData = data.selectData;
     this.horseColor = [
       {value: 'white', viewValue: 'White'},
       {value: 'brown', viewValue: 'Brown'},
@@ -34,6 +36,17 @@ export class DialogComponent implements OnInit {
       'horseColor': ['', Validators.compose([Validators.required])],
       'ushja': ['', Validators.compose([Validators.required])]
     });
+
+    if(this.selectData != ''){
+      this.horse.setValue({
+        'horseName': this.selectData.horse_name,
+        'horseNum': this.selectData.horse_number,
+        'AgeVerified': this.selectData.age_verified == 1? 'yes' : 'no',
+        'horseDob': this.selectData.dob,
+        'horseColor': this.selectData.color,
+        'ushja': this.selectData.ushja_registered == 1? true : false,
+      });
+    }
   }
 
 
@@ -41,7 +54,7 @@ export class DialogComponent implements OnInit {
 
   }
 
-  horseDetail(value) {
+  horseDetail(value, key) {
     if (this.horse.valid) {
       this.setDob = this.datePipe.transform(this.horse.controls['horseDob'].value, 'yyyy-MM-dd');
       const data = {

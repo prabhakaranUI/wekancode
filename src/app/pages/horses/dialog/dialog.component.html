@@ -1,6 +1,6 @@
 
-<h1 mat-dialog-title>{{openkey}} Horse</h1>
-<form [formGroup]="horse" (ngSubmit)="horseDetail(horse.value)" *ngIf="openkey == 'add' || openkey == 'update'">
+<h1 mat-dialog-title *ngIf="openkey != 'delete'">{{openkey}} Horse</h1>
+<form [formGroup]="horse" *ngIf="openkey == 'add' || openkey == 'update'">
 <div mat-dialog-content>
 
     <mat-form-field appearance="fill" class="w-100">
@@ -14,8 +14,8 @@
         <textarea matInput formControlName="horseNum"></textarea>
         <mat-error *ngIf="horse.controls.horseNum.errors?.required">Hores Number is required</mat-error>
 
-    </mat-form-field>
-    <mat-radio-group aria-label="Age Verified" formControlName="AgeVerified">
+    </mat-form-field >
+    <mat-radio-group aria-label="Age Verified" formControlName="AgeVerified" style="margin-bottom: 10px">
         <mat-label style="margin-right: 10px">Age Verified:</mat-label>
         <mat-radio-button value="yes" style="margin-right: 10px">Yes</mat-radio-button>
         <mat-radio-button value="no">NO</mat-radio-button>
@@ -41,14 +41,17 @@
 </div>
 <div mat-dialog-actions fxLayout="row"  fxLayoutAlign="end center">
     <button mat-button  (click)="onNoClick('close')">Cancel</button>
-    <button mat-raised-button color="primary" cdkFocusInitial type="submit" >Submit</button>
+    <button mat-raised-button color="primary" *ngIf="openkey == 'add'" cdkFocusInitial (click)="horseDetail(horse.value, 'add')" >Submit</button>
+    <button mat-raised-button color="primary" *ngIf="openkey == 'update'" cdkFocusInitial (click)="horseDetail(horse.value, 'update')">Update</button>
 </div>
 </form>
 
-<div fxLayout="row"  fxLayoutAlign="center center" *ngIf="openkey == 'delete'">
-    <p>Are you sure want to delete?</p>
+<div  *ngIf="openkey == 'delete'">
+    <p style="text-align: center">Are you sure you want to delete this horse?</p>
+    <div fxLayout="row"  fxLayoutAlign="center center">
     <button mat-button  (click)="onNoClick('close')">Cancel</button>
     <button mat-raised-button color="primary" cdkFocusInitial type="submit" (click)="onNoClick('confirm')">Delete</button>
+    </div>
 
 </div>
 
