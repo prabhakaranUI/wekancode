@@ -14,8 +14,8 @@
         <textarea matInput formControlName="horseNum"></textarea>
         <mat-error *ngIf="horse.controls.horseNum.errors?.required">Hores Number is required</mat-error>
 
-    </mat-form-field >
-    <mat-radio-group aria-label="Age Verified" formControlName="AgeVerified" style="margin-bottom: 10px">
+    </mat-form-field>
+    <mat-radio-group aria-label="Age Verified" formControlName="AgeVerified" class="radioBtn">
         <mat-label style="margin-right: 10px">Age Verified:</mat-label>
         <mat-radio-button value="yes" style="margin-right: 10px">Yes</mat-radio-button>
         <mat-radio-button value="no">NO</mat-radio-button>
