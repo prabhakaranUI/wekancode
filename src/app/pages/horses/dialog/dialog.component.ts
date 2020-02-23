@@ -3,6 +3,8 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import {FormBuilder, FormGroup, Validators, EmailValidator} from '@angular/forms';
 import {LoginService} from "../../../shared/login.service";
 import { DatePipe } from '@angular/common';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-dialog',
@@ -18,11 +20,10 @@ export class DialogComponent implements OnInit {
 
   constructor(
       public dialogRef: MatDialogRef<DialogComponent>,
-      @Inject(MAT_DIALOG_DATA) public data: any, public fb: FormBuilder, public login_service: LoginService, private datePipe: DatePipe) {
-
+      @Inject(MAT_DIALOG_DATA) public data: any, public fb: FormBuilder, public login_service: LoginService, private datePipe: DatePipe,  private _snackBar: MatSnackBar,) {
      this.openkey = data.key;
      this.selectData = data.selectData;
-    this.horseColor = [
+     this.horseColor = [
       {value: 'white', viewValue: 'White'},
       {value: 'brown', viewValue: 'Brown'},
       {value: 'gray', viewValue: 'Gray'}
@@ -54,6 +55,8 @@ export class DialogComponent implements OnInit {
 
   }
 
+
+///add///
   horseDetail(value, key) {
     if (this.horse.valid) {
       this.setDob = this.datePipe.transform(this.horse.controls['horseDob'].value, 'yyyy-MM-dd');
@@ -68,7 +71,7 @@ export class DialogComponent implements OnInit {
       if (key == 'add') {
         this.login_service.add(data).subscribe(
             (successData) => {
-              this.loginDataSuccess(successData);
+              this.loginDataSuccess(successData, key);
             },
             (error) => {
               this.loginDataFailure(error);
@@ -76,7 +79,7 @@ export class DialogComponent implements OnInit {
       } else{
         this.login_service.update(data, this.selectData.id).subscribe(
             (successData) => {
-              this.loginDataSuccess(successData);
+              this.loginDataSuccess(successData, key);
             },
             (error) => {
               this.loginDataFailure(error);
@@ -85,8 +88,15 @@ export class DialogComponent implements OnInit {
     }
   }
 
-  public loginDataSuccess(successData) {
+  public loginDataSuccess(successData, key) {
     console.log(successData);
+    if (key == 'add') {
+      this.openSnackBar('Added Successful', 'ok');
+    } else{
+      this.openSnackBar('Updated Successful', 'ok');
+
+    }
+
     this.onNoClick('cloce')
 
   }
@@ -96,12 +106,14 @@ export class DialogComponent implements OnInit {
   }
 
 
-
-
-
-
   onNoClick(key): void {
     this.dialogRef.close(key);
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 
 }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {LoginService} from "../../shared/login.service";
 import {DialogComponent} from "./dialog/dialog.component";
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
 
 
 @Component({
@@ -11,7 +13,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 })
 export class HorsesComponent implements OnInit {
     public horseList: any;
-  constructor(public login_service: LoginService, public dialog: MatDialog) {
+  constructor(public login_service: LoginService, public dialog: MatDialog,  private _snackBar: MatSnackBar) {
 
   }
 
@@ -75,10 +77,17 @@ export class HorsesComponent implements OnInit {
 
     public deleteHorseSuccess(successData){
         console.log(successData);
+        this.openSnackBar('Deleted Successful', 'ok');
         this.getList();
     }
     public deleteHorseFailure(error){
         console.log(error)
+    }
+
+    openSnackBar(message: string, action: string) {
+        this._snackBar.open(message, action, {
+            duration: 2000,
+        });
     }
 
 
