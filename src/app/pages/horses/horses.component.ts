@@ -13,8 +13,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class HorsesComponent implements OnInit {
     public horseList: any;
+    public spinner: boolean;
   constructor(public login_service: LoginService, public dialog: MatDialog,  private _snackBar: MatSnackBar) {
-
   }
 
   ngOnInit() {
@@ -46,6 +46,7 @@ export class HorsesComponent implements OnInit {
 
   ////list////
   getList(){
+      this.spinner = true;
       this.login_service.list().subscribe(
           (successData) => {
             this.loginDataSuccess(successData);
@@ -56,8 +57,8 @@ export class HorsesComponent implements OnInit {
     }
 
   public loginDataSuccess(successData){
-    console.log(successData, 'horses');
-    this.horseList = successData.data
+      this.spinner = false;
+      this.horseList = successData.data
   }
   public loginDataFailure(error){
     console.log(error)

@@ -52,7 +52,7 @@ export class LoginService {
 
 
 
-  //Add
+  //delete
   delete(id) {
     const token = this.auth.getAccessToken();
     const httpOptions = {
