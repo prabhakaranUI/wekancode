@@ -18,7 +18,7 @@ export class LoginService {
     console.log(data)
     let json = JSON.stringify(data);
     const httpOptions = {
-      headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'})
+      headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json'})
     };
     const url = `${this.apiUrl}/users/login` ;
     return this.http.post(url , data, httpOptions).pipe(
@@ -31,7 +31,7 @@ export class LoginService {
   list() {
     const token = this.auth.getAccessToken();
     const httpOptions = {
-      headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Authorization' : 'Bearer' + token})
+      headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization' : 'Bearer' + token})
     };
     const url = `${this.apiUrl}/horses ` ;
     return this.http.get(url, httpOptions).pipe(
@@ -43,7 +43,7 @@ export class LoginService {
   add(data) {
     const token = this.auth.getAccessToken();
     const httpOptions = {
-      headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Authorization' : 'Bearer' + token})
+      headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization' : 'Bearer' + token})
     };
     const url = `${this.apiUrl}/horses` ;
     return this.http.post(url , data, httpOptions).pipe(
@@ -56,7 +56,7 @@ export class LoginService {
   delete(id) {
     const token = this.auth.getAccessToken();
     const httpOptions = {
-      headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Authorization' : 'Bearer' + token})
+      headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization' : 'Bearer' + token})
     };
     const url = `${this.apiUrl}/horses/${id}` ;
     return this.http.delete(url , httpOptions).pipe(
